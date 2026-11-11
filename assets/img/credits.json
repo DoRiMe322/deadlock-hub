@@ -1,0 +1,90 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f62864664.jpg",
+   "files": [
+    "photo-f62864664-500.jpg",
+    "photo-f62864664-960.jpg",
+    "photo-f62864664.jpg"
+   ],
+   "id": "f62864664",
+   "alt": "Chrysler Building and New York Skyline Night Panorama",
+   "by": "Alan Bastick",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Chrysler_Building_and_New_York_Skyline_Night_Panorama.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f145821809-960.jpg",
+   "files": [
+    "photo-f145821809-500.jpg",
+    "photo-f145821809-960.jpg"
+   ],
+   "id": "f145821809",
+   "alt": "Manhattan Skyline by Night at Hunter's Point, Long Island, New York, USA (51229041587)",
+   "by": "Domenico Convertini from Zurich, Schweiz",
+   "licence": "CC BY-SA 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Manhattan_Skyline_by_Night_at_Hunter%27s_Point,_Long_Island,_New_York,_USA_(51229041587).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f68953599-960.jpg",
+   "files": [
+    "photo-f68953599-500.jpg",
+    "photo-f68953599-960.jpg"
+   ],
+   "id": "f68953599",
+   "alt": "The New York City Skyline at night",
+   "by": "Bruce Emmerling",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:The_New_York_City_Skyline_at_night.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f162997104-960.jpg",
+   "files": [
+    "photo-f162997104-500.jpg",
+    "photo-f162997104-960.jpg"
+   ],
+   "id": "f162997104",
+   "alt": "At New York City 2025 001 - Hudson Yards skyline, New York, at night",
+   "by": "Photograph by Mike Peel ( www.mikepeel.net ).",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:At_New_York_City_2025_001_-_Hudson_Yards_skyline,_New_York,_at_night.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f134491723-960.jpg",
+   "files": [
+    "photo-f134491723-500.jpg",
+    "photo-f134491723-960.jpg"
+   ],
+   "id": "f134491723",
+   "alt": "NewYork-Skyline-night-May-2007",
+   "by": "Acediscovery",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:NewYork-Skyline-night-May-2007.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f143586454-960.jpg",
+   "files": [
+    "photo-f143586454-500.jpg",
+    "photo-f143586454-960.jpg"
+   ],
+   "id": "f143586454",
+   "alt": "New-York-City-night-skyline-September-2014",
+   "by": "Acediscovery",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:New-York-City-night-skyline-September-2014.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

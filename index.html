@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-team="amber">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deadlock Hub: builds, players, news, farm routes</title>
+<meta name="description" content="Fan-made concept of a Deadlock community hub with builds and win rates, top players, news, farm routes, patches and a forum.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0d0b0a">
+<meta property="og:title" content="Deadlock Hub: builds, players, news, farm routes">
+<meta property="og:image" content="share.jpg">
+<style>
+:root{--bg:#0d0b0a;--panel:#171310;--line:#3b2f22;--ink:#eadfc8;--muted:#a09580;--team:#e0a63a;--wpn:#f0a03c;--vit:#6fcf7c;--spi:#b58cff;--good:#7bd67b;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:radial-gradient(900px 420px at 50% -80px,color-mix(in srgb,var(--team) 24%,transparent),transparent),var(--bg);color:var(--ink);font:500 1.05rem/1.5 "Rajdhani",system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.1rem}
+h1,h2,h3{font-family:"Cinzel",Georgia,serif;margin:0;letter-spacing:.02em}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--team)}
+:is(a,button,input,select):focus-visible{outline:2px solid var(--team);outline-offset:2px}
+.hero{position:relative;text-align:center;padding:2.6rem 0 1.6rem;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 120%,color-mix(in srgb,var(--team) 20%,transparent) 0 4deg,transparent 4deg 9deg);-webkit-mask:linear-gradient(#000,transparent 85%);mask:linear-gradient(#000,transparent 85%)}
+.hero>*{position:relative}
+h1{font-size:clamp(2.4rem,9vw,5rem);font-weight:900;color:var(--team);text-shadow:0 0 40px color-mix(in srgb,var(--team) 50%,transparent)}
+.hero p{margin:.4rem auto 1rem;max-width:52ch;color:var(--muted);font-size:1.15rem}
+.team{display:inline-flex;gap:.4rem}
+.chip{border:1.5px solid var(--line);background:var(--panel);border-radius:6px;padding:.3rem .8rem;font-weight:700}
+.chip[aria-pressed="true"],.chip.on{border-color:var(--team);color:var(--team);background:color-mix(in srgb,var(--team) 12%,var(--panel))}
+.tabs{display:flex;gap:.3rem;overflow-x:auto;border-bottom:1px solid var(--line);margin-top:.6rem;scrollbar-width:none}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:.7rem 1rem;font:700 1.1rem "Rajdhani";color:var(--muted);white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--team);border-bottom-color:var(--team)}
+.panel{padding:1.4rem 0 2.4rem}
+.box{background:var(--panel);border:1px solid var(--line);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+.note{color:var(--muted);font-size:.95rem;margin:.2rem 0 1rem}
+.row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.8rem}
+.split{display:grid;grid-template-columns:270px 1fr;gap:1.2rem}
+.rail{max-height:640px;overflow:auto;padding:.4rem}
+.hr{display:grid;grid-template-columns:1fr auto;gap:0 .6rem;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;padding:.45rem .6rem}
+.hr:hover,.hr[aria-pressed="true"]{background:color-mix(in srgb,var(--team) 10%,transparent);border-left-color:var(--team)}
+.bar{grid-column:1/-1;height:4px;background:#2a2118;margin-top:.2rem}
+.bar i{display:block;height:100%;background:var(--good)}
+.wr{font-weight:700;color:var(--good)}
+.builds{display:grid;gap:1rem}
+.build{padding:1.1rem 1.3rem}
+.bh{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.big{font:900 2.2rem/1 "Cinzel",serif;color:var(--good)}
+.tag{font-size:.8rem;font-weight:700;border:1px solid currentColor;padding:0 .5rem;border-radius:4px;margin-left:.5rem}
+.grp{display:flex;flex-wrap:wrap;gap:.35rem;margin:.45rem 0;align-items:center}
+.grp b{width:4.6rem;font-size:.85rem;color:var(--muted)}
+.it{padding:.1rem .6rem;border-radius:4px;border:1px solid;font-size:.95rem}
+.w{color:var(--wpn)}.v{color:var(--vit)}.s{color:var(--spi)}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-size:.85rem}
+td.n{font:800 1.1rem "Cinzel",serif;color:var(--team)}
+.scroll{overflow-x:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
+.card{padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.4rem}
+.card h3{font-size:1.05rem;line-height:1.25}
+.src{color:var(--muted);font-size:.88rem}
+.tl{list-style:none;margin:0;padding:0 0 0 1.2rem;border-left:2px solid var(--team)}
+.tl li{position:relative;padding:0 0 1.1rem 1rem}
+.tl li::before{content:"";position:absolute;left:-1.62rem;top:.45rem;width:.7rem;height:.7rem;background:var(--team);transform:rotate(45deg)}
+.tl b{color:var(--team)}
+input[type=range]{width:100%;accent-color:var(--team)}
+.min{font:900 3rem/1 "Cinzel",serif;color:var(--team)}
+.ev{display:grid;grid-template-columns:5.5rem 1fr auto;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--line);align-items:center}
+.ev.off{opacity:.4}
+.st{font-weight:700;font-size:.85rem;color:var(--good)}
+.ev.off .st{color:var(--muted)}
+.thread{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;padding:.8rem 1rem;border-bottom:1px solid var(--line)}
+.vote{display:grid;justify-items:center;border:1.5px solid var(--line);border-radius:6px;padding:.2rem .7rem;background:none;line-height:1.2}
+.vote[aria-pressed="true"]{border-color:var(--team);color:var(--team)}
+form.nt{display:grid;grid-template-columns:1fr auto auto;gap:.6rem;padding:1rem}
+input[type=text],select{background:#0f0c0a;color:var(--ink);border:1.5px solid var(--line);border-radius:6px;padding:.5rem .7rem;font:inherit}
+.go{background:var(--team);color:#1a1209;border:0;border-radius:6px;padding:.5rem 1.1rem;font-weight:700}
+footer{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(--muted);font-size:.92rem}
+@media (max-width:800px){.split{grid-template-columns:1fr}.rail{max-height:230px}.ev{grid-template-columns:4rem 1fr}.ev .st{grid-column:2}form.nt{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.panel{padding-top:1.4rem;padding-bottom:2.4rem}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
+.top .wrap{display:flex;align-items:center;gap:1rem;min-height:3.6rem}
+.mark{display:flex;align-items:center;gap:.55rem;font:900 1.1rem "Cinzel",serif;letter-spacing:.08em;color:var(--team);text-decoration:none;white-space:nowrap}
+.mark svg{width:1.6rem;height:1.6rem}
+.tabs{flex:1;justify-content:center;border-bottom:0;margin:0}
+.tabs button{padding:.9rem .8rem}
+.swatches{display:flex;gap:.45rem}
+.sw{width:1.5rem;height:1.5rem;border-radius:50%;border:2px solid var(--line);padding:0}
+#amber{background:#e0a63a}#sapphire{background:#4d8fe8}
+.sw[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--team)}
+.home{padding-top:0}
+.stage{position:relative;min-height:min(82vh,660px);display:grid;align-items:center;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(70% 80% at 50% 100%,color-mix(in srgb,var(--team) 32%,transparent),transparent 70%),repeating-conic-gradient(from 0deg at 50% 100%,color-mix(in srgb,var(--team) 11%,transparent) 0 4deg,transparent 4deg 9deg)}
+.skyline{position:absolute;left:0;bottom:0;width:100%;height:56%}
+.embers{position:absolute;inset:0;pointer-events:none;z-index:1}
+.embers i{position:absolute;bottom:-10px;border-radius:50%;background:var(--team);box-shadow:0 0 10px var(--team);opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0);opacity:0}12%{opacity:.9}100%{transform:translateY(-70vh);opacity:0}}
+.welcome{position:relative;z-index:2;text-align:center;max-width:760px;margin:0 auto;padding:3rem 1.1rem 11rem}
+.kick{font:600 1.2rem "Rajdhani";color:var(--team);margin:0 0 .5rem;letter-spacing:.05em}
+.welcome h1{font-size:clamp(2.8rem,10vw,6rem);font-weight:900;line-height:1;margin-bottom:1rem;color:var(--ink);text-shadow:0 0 50px color-mix(in srgb,var(--team) 60%,transparent)}
+.lead{font-size:1.25rem;color:var(--muted);max-width:44ch;margin:0 auto 1.4rem}
+.welcome .row{justify-content:center}
+.strip{display:flex;align-items:center;gap:.7rem;width:100%;margin:1.6rem 0;padding:.8rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--team);text-align:left;font-weight:600}
+.dot{width:.7rem;height:.7rem;background:var(--team);border-radius:50%;box-shadow:0 0 10px var(--team)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-top:1rem}
+.tile{display:grid;gap:.3rem;text-align:left;padding:1.3rem;background:var(--panel);border:1px solid var(--line);clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);transition:transform .15s,background .15s}
+.tile:hover{transform:translateY(-3px);background:color-mix(in srgb,var(--team) 9%,var(--panel))}
+.tile svg{width:2.2rem;height:2.2rem;fill:none;stroke:var(--team);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tile h3{font-size:1.2rem;margin-top:.4rem}
+.tile p{margin:0;color:var(--muted)}
+.tile b{color:var(--team);font-size:.95rem}
+h2.sec{font-size:clamp(1.5rem,4vw,2.2rem)}
+@media (max-width:800px){.top .wrap{flex-wrap:wrap;gap:.2rem 1rem;padding-top:.4rem}.tabs{order:3;flex-basis:100%;justify-content:flex-start}.swatches{margin-left:auto}.welcome{padding-bottom:9rem}}
+
+/* ---------- 2026 redesign: a photographed city under the hero, team colour on everything, richer panels */
+:root{--panel:#16120f;--panel-2:#1e1814;--line:#3a2e22;--muted:#b3a68e}
+html[data-team="sapphire"]{--line:#26324a;--panel:#10141c;--panel-2:#161c27;--bg:#0a0c11}
+body{background:var(--bg)}
+.top{background:color-mix(in srgb,var(--bg) 94%,transparent)}
+.stage{min-height:min(88vh,760px);background:#000;align-items:end}
+.city{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%;transition:opacity .6s ease}
+.city--sapphire{opacity:0}
+html[data-team="sapphire"] .city--amber{opacity:0}
+html[data-team="sapphire"] .city--sapphire{opacity:1}
+.stage::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgb(0 0 0/.55) 0%,rgb(0 0 0/.15) 35%,rgb(0 0 0/.35) 60%,var(--bg) 100%)}
+.welcome{z-index:2;padding:8rem 1.1rem 5rem}
+.welcome h1{font-size:clamp(3rem,11vw,7.2rem);letter-spacing:.04em;color:#fff;text-shadow:0 2px 0 rgb(0 0 0/.4),0 0 60px color-mix(in srgb,var(--team) 70%,transparent)}
+.kick{display:inline-block;padding:.25rem .8rem;border:1px solid color-mix(in srgb,var(--team) 60%,transparent);background:rgb(0 0 0/.35);border-radius:999px;font-size:1rem}
+.lead{color:#e9e1d1;text-shadow:0 1px 12px rgb(0 0 0/.8)}
+.go{padding:.75rem 1.4rem;font-size:1.1rem;border-radius:8px;box-shadow:0 10px 30px -10px var(--team);transition:transform .15s,box-shadow .15s}
+.go:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px var(--team)}
+.go:active{transform:translateY(1px)}
+.welcome .chip{padding:.7rem 1.3rem;font-size:1.1rem;border-radius:8px;background:rgb(0 0 0/.45);border-color:rgb(255 255 255/.25)}
+.welcome .chip:hover{border-color:var(--team)}
+.embers{z-index:1}
+.strip{margin:2rem 0 2.6rem;background:linear-gradient(90deg,color-mix(in srgb,var(--team) 16%,var(--panel)),var(--panel) 60%);border-color:var(--line);border-left-width:4px;border-radius:0 10px 10px 0;transition:transform .15s}
+.strip:hover{transform:translateX(4px)}
+h2.sec{font-size:clamp(1.8rem,4.4vw,2.8rem);margin-bottom:.4rem}
+.tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem}
+.tile{position:relative;min-height:190px;padding:1.5rem;background:linear-gradient(160deg,var(--panel-2),var(--panel));overflow:hidden}
+.tile::after{content:"";position:absolute;right:-40px;bottom:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--tc,var(--team)) 45%,transparent),transparent 70%);transition:transform .3s}
+.tile:hover::after{transform:scale(1.25)}
+.tile:nth-child(1){--tc:#f0a03c}.tile:nth-child(2){--tc:#e0c35a}.tile:nth-child(3){--tc:#4d8fe8}.tile:nth-child(4){--tc:#6fcf7c}.tile:nth-child(5){--tc:#e2654a}.tile:nth-child(6){--tc:#3fc1c9}
+.tile svg{stroke:var(--tc,var(--team));width:2.6rem;height:2.6rem}
+.tile b{color:var(--tc,var(--team))}
+.tile h3{font-size:1.35rem}
+.panel.wrap{padding-top:2.2rem}
+.box{background:linear-gradient(170deg,var(--panel-2),var(--panel))}
+.it{background:color-mix(in srgb,currentColor 12%,transparent);border-color:color-mix(in srgb,currentColor 55%,transparent);font-weight:600}
+.build{border-left:3px solid var(--good)}
+.big{text-shadow:0 0 24px color-mix(in srgb,var(--good) 50%,transparent)}
+tbody tr:nth-child(1) td.n{color:#f2c94c}tbody tr:nth-child(2) td.n{color:#cfd6df}tbody tr:nth-child(3) td.n{color:#d58a4e}
+tbody tr:nth-child(-n+3){background:color-mix(in srgb,var(--team) 7%,transparent)}
+tbody tr:hover{background:color-mix(in srgb,var(--team) 12%,transparent)}
+.card{transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-2px)}
+.min{font-size:4.2rem;text-shadow:0 0 30px color-mix(in srgb,var(--team) 50%,transparent)}
+footer{display:grid;gap:.4rem}
+footer p{margin:0}
+footer a{color:var(--muted)}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.tiles{grid-template-columns:1fr}.welcome{padding:6rem 1.1rem 3.5rem}.stage{min-height:78vh}}
+@media (prefers-reduced-motion:reduce){.city{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="mark" href="#" id="home" aria-label="Deadlock Hub, home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2l12 14-12 14L4 16z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16" cy="16" r="4.5" fill="currentColor"/></svg>Deadlock Hub</a>
+  <nav class="tabs" role="tablist" id="tabs" aria-label="Sections"></nav>
+  <div class="swatches" role="group" aria-label="Team color"><button class="sw" id="amber" aria-label="Amber Hand" aria-pressed="true"></button><button class="sw" id="sapphire" aria-label="Sapphire Flame" aria-pressed="false"></button></div>
+</div></header>
+<main>
+<section class="panel home" data-tab="Home">
+  <div class="stage" id="stage">
+    <img class="city city--amber" src="assets/img/photo-f134491723-1920.jpg" srcset="assets/img/photo-f134491723-960.jpg 960w, assets/img/photo-f134491723-1920.jpg 1920w" sizes="100vw" width="1920" height="1440" alt="" fetchpriority="high">
+    <img class="city city--sapphire" src="assets/img/photo-f143586454-1920.jpg" srcset="assets/img/photo-f143586454-960.jpg 960w, assets/img/photo-f143586454-1920.jpg 1920w" sizes="100vw" width="1920" height="1440" alt="" loading="lazy">
+    <div class="welcome">
+      <p class="kick">Welcome back, Seeker.</p>
+      <h1>Deadlock Hub</h1>
+      <p class="lead">Builds, top players, news and farm routes for Valve’s hero shooter. Pick a section and go into your next match with a plan.</p>
+      <div class="row"><button class="go" type="button" data-go="Builds">Explore builds</button><button class="chip" type="button" data-go="News">Read the news</button></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <button class="strip" type="button" data-go="Patches"><span class="dot"></span>Latest patch: October 5, 2026. The City Never Sleeps update arrived on September 29. See all patches</button>
+    <h2 class="sec">Where to next?</h2>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</section>
+
+    <section class="panel wrap" data-tab="Builds" hidden>
+      <p class="note">All 44 heroes released by October 20, 2026 (Deadlock Wiki, checked October 27, 2026). Win rates, pick rates and builds are sample data, not real match statistics, and item names may differ after the shop rework.</p>
+      <div class="split">
+        <div>
+          <input type="text" id="hq" placeholder="Search a hero" aria-label="Search a hero" style="width:100%;margin-bottom:.6rem"><div class="row" id="sort"></div>
+          <div class="box rail" id="rail"></div>
+        </div>
+        <div><h2 id="hname" style="margin-bottom:.8rem"></h2><div class="builds" id="builds"></div></div>
+      </div>
+    </section>
+    <section class="panel wrap" data-tab="Players" hidden>
+      <p class="note">Sample leaderboard with invented player names, to show the layout.</p>
+      <div class="row" id="regions"></div>
+      <div class="box scroll"><table><thead><tr><th>#</th><th>Player</th><th>Region</th><th>Main</th><th>Points</th><th>Win rate</th></tr></thead><tbody id="ptb"></tbody></table></div>
+    </section>
+    <section class="panel wrap" data-tab="News" hidden>
+      <div class="row" id="srcs"></div>
+      <div class="row"><button class="chip" id="refresh">Refresh news</button><span class="src" id="upd"></span></div>
+      <div class="cards" id="news"></div>
+      <p class="note" style="margin-top:1rem">Items link to their original sources. In the full version a scheduled job collects the feeds, because a static page cannot read other sites directly.</p>
+    </section>
+    <section class="panel wrap" data-tab="Farm route" hidden>
+      <p class="note">Timings come from community guides written before the September 29, 2026 update, which reworked the map and the shop. Treat them as a starting point and check them in game.</p>
+      <div class="split">
+        <div class="box" style="padding:1.2rem">
+          <div class="min" id="mm">0:00</div>
+          <label for="minute" class="note">Game minute</label>
+          <input type="range" id="minute" min="0" max="25" value="0">
+          <p id="tip" style="margin-top:1rem"></p>
+        </div>
+        <div class="box" style="padding:.6rem 1.2rem" id="ev"></div>
+      </div>
+    </section>
+    <section class="panel wrap" data-tab="Patches" hidden>
+      <p class="note">Sources: Liquipedia and community trackers. Checked on October 27, 2026.</p>
+      <ul class="tl" id="pt"></ul>
+    </section>
+    <section class="panel wrap" data-tab="Forum" hidden>
+      <form class="box nt" id="nt"><input type="text" id="ttl" placeholder="Start a thread: a build, a question, a guide" aria-label="Thread title"><select id="tg" aria-label="Tag"><option>Build</option><option>Guide</option><option>Question</option></select><button class="go" type="submit">Post</button></form>
+      <div class="row" style="margin-top:1rem" id="fs"></div>
+      <div class="box" id="th"></div>
+    </section>
+  </main>
+<footer class="wrap"><p>Fan-made concept, not affiliated with Valve. Deadlock is a trademark of Valve Corporation. Statistics, players and forum threads are sample data. Patches and news were checked on October 27, 2026 and link to their sources.</p><p><a href="credits.html">Photographs via Wikimedia Commons</a> · A concept site by Nikita S.</p></footer>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function E(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; }
+  function chip(label, on, fn) { var b = E('button', 'chip', label); b.type = 'button'; b.setAttribute('aria-pressed', String(on)); b.addEventListener('click', fn); return b; }
+
+  // Team color
+  function team(c, id) { document.documentElement.style.setProperty('--team', c); document.documentElement.dataset.team = id; $('amber').setAttribute('aria-pressed', String(id === 'amber')); $('sapphire').setAttribute('aria-pressed', String(id === 'sapphire')); }
+  $('amber').onclick = function () { team('#e0a63a', 'amber'); };
+  $('sapphire').onclick = function () { team('#4d8fe8', 'sapphire'); };
+
+  // Tabs
+  var panels = document.querySelectorAll('[data-tab]');
+  panels.forEach(function (p) {
+    var b = E('button', '', p.dataset.tab); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(!p.hidden));
+    b.addEventListener('click', function () {
+      panels.forEach(function (q) { q.hidden = q !== p; });
+      document.querySelectorAll('#tabs button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+    });
+    $('tabs').append(b);
+  });
+
+  // Sample data: [name, main style, win rate, pick rate]
+  var HN = [['Abrams','Tank'],['Apollo','Gun'],['Baba','Spirit'],['Bebop','Spirit'],['Billy','Tank'],['Calico','Spirit'],['Celeste','Spirit'],['Deadman Danny','Tank'],['The Doorman','Tank'],['Drifter','Gun'],['Dynamo','Spirit'],['Graves','Spirit'],['Grey Talon','Gun'],['Haze','Gun'],['Holliday','Gun'],['Infernus','Spirit'],['Ivy','Spirit'],['Kelvin','Spirit'],['Lady Geist','Spirit'],['Lash','Tank'],['McGinnis','Gun'],['Mina','Spirit'],['Mirage','Spirit'],['Mo & Krill','Tank'],['Nurse Harrow','Spirit'],['Paige','Spirit'],['Paradox','Spirit'],['Pocket','Spirit'],['Rat King','Gun'],['Rem','Spirit'],['Seven','Spirit'],['Shiv','Gun'],['Silver','Gun'],['Sinclair','Spirit'],['Solomon','Spirit'],['Venator','Gun'],['Victor','Tank'],['Vindicta','Gun'],['Violet','Gun'],['Viscous','Tank'],['Vyper','Gun'],['Warden','Tank'],['Wraith','Gun'],['Yamato','Gun']];
+  var T = {
+    Gun: { w: ['Basic Magazine', 'Close Quarters', 'Headshot Booster', 'Rapid Rounds', 'Fleetfoot'], v: ['Extra Health', 'Bullet Armor', 'Healing Rite'], s: ['Extra Charge', 'Mystic Burst'] },
+    Spirit: { w: ['Basic Magazine', 'Fleetfoot'], v: ['Extra Health', 'Spirit Armor', 'Enchanter\u2019s Barrier'], s: ['Extra Charge', 'Mystic Burst', 'Improved Spirit', 'Superior Cooldown', 'Rapid Recharge'] },
+    Tank: { w: ['Close Quarters', 'Fleetfoot'], v: ['Extra Health', 'Bullet Armor', 'Spirit Armor', 'Metal Skin', 'Fortitude'], s: ['Extra Charge', 'Slowing Hex'] }
+  };
+  var hash = function (s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 997; return h; };
+  var H = HN.map(function (n) { return [n[0], n[1], Math.round((46.5 + (hash(n[0] + 'w') % 90) / 10) * 10) / 10, Math.round((1.5 + (hash(n[0] + 'p') % 70) / 10) * 10) / 10]; });
+  function buildsFor(h) {
+    return ['Gun', 'Spirit', 'Tank'].map(function (k) {
+      var off = k === h[1] ? 1.4 : k === 'Tank' ? -0.6 : -1.6;
+      var wr = Math.round((h[2] + off + (hash(h[0] + k) % 7) / 10 - 0.3) * 10) / 10;
+      return { n: { Gun: 'Gun carry', Spirit: 'Spirit burst', Tank: 'Frontline' }[k], k: k, wr: wr, m: Math.round(h[3] * 4200 * (k === h[1] ? 1 : 0.45)) };
+    }).sort(function (a, b) { return b.wr - a.wr; });
+  }
+  var sel = 15, sortBy = 'wr';
+  function drawRail() {
+    var q = ($('hq').value || '').trim().toLowerCase();
+    var list = H.map(function (h, i) { return { h: h, i: i }; }).filter(function (x) { return !q || x.h[0].toLowerCase().indexOf(q) > -1; });
+    list.sort(function (a, b) { return sortBy === 'name' ? a.h[0].localeCompare(b.h[0]) : sortBy === 'pick' ? b.h[3] - a.h[3] : b.h[2] - a.h[2]; });
+    $('rail').replaceChildren();
+    list.forEach(function (x) {
+      var b = E('button', 'hr'); b.type = 'button'; b.setAttribute('aria-pressed', String(x.i === sel));
+      var bar = E('span', 'bar'); var f = E('i'); f.style.width = Math.min(100, (x.h[2] - 40) * 5) + '%'; bar.append(f);
+      b.append(E('span', '', x.h[0]), E('span', 'wr', x.h[2].toFixed(1) + '%'), bar);
+      b.addEventListener('click', function () { sel = x.i; drawRail(); drawBuilds(); });
+      $('rail').append(b);
+    });
+  }
+  function drawBuilds() {
+    var h = H[sel]; $('hname').textContent = h[0] + ' builds'; $('builds').replaceChildren();
+    buildsFor(h).forEach(function (b) {
+      var c = E('article', 'box build'), top = E('div', 'bh'), l = E('div'), r = E('div');
+      var t = E('h3', '', b.n); t.append(E('span', 'tag ' + (b.k === 'Gun' ? 'w' : b.k === 'Spirit' ? 's' : 'v'), b.k));
+      l.append(t, E('div', 'src', b.m.toLocaleString('en-US') + ' matches'));
+      r.append(E('div', 'big', b.wr.toFixed(1) + '%'), E('div', 'src', 'win rate'));
+      top.append(l, r); c.append(top);
+      var lines = [];
+      [['Weapon', 'w'], ['Vitality', 'v'], ['Spirit', 's']].forEach(function (g) {
+        var row = E('div', 'grp'); row.append(E('b', '', g[0]));
+        T[b.k][g[1]].forEach(function (n) { row.append(E('span', 'it ' + g[1], n)); lines.push(n); });
+        c.append(row);
+      });
+      var cp = chip('Copy item list', false, function () {
+        var t = h[0] + ' / ' + b.n + ': ' + lines.join(', ');
+        try { navigator.clipboard.writeText(t).then(function () { cp.textContent = 'Copied'; }, function () { cp.textContent = 'Copy failed'; }); } catch (e) { cp.textContent = 'Copy failed'; }
+        setTimeout(function () { cp.textContent = 'Copy item list'; }, 1500);
+      });
+      c.append(cp); $('builds').append(c);
+    });
+  }
+  [['wr', 'Win rate'], ['pick', 'Pick rate'], ['name', 'Name']].forEach(function (s) {
+    var b = chip(s[1], s[0] === sortBy, function () { sortBy = s[0]; document.querySelectorAll('#sort .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); drawRail(); });
+    $('sort').append(b);
+  });
+  $('hq').addEventListener('input', drawRail);
+  drawRail(); drawBuilds();
+
+  // Players
+  var tags = ['NightOwl', 'Zenith', 'Kestrel', 'Mooncalf', 'Ashfall', 'Quartz', 'Brimstone', 'Velvet', 'Rook', 'Tangent', 'Halcyon', 'Pyre', 'Larkspur', 'Cinder', 'Obsidian'];
+  var regs = ['Europe', 'North America', 'Asia', 'South America', 'Oceania'], reg = 'All';
+  var P = tags.map(function (t, i) { return { t: t, r: regs[i % 5], h: H[(i * 5 + 3) % H.length][0], p: 3400 - i * 53 - hash(t) % 20, w: 54 + (hash(t) % 90) / 10 }; });
+  function drawPlayers() {
+    $('ptb').replaceChildren(); var n = 0;
+    P.filter(function (p) { return reg === 'All' || p.r === reg; }).forEach(function (p) {
+      n++; var tr = E('tr'); [n, p.t, p.r, p.h, p.p.toLocaleString('en-US'), p.w.toFixed(1) + '%'].forEach(function (v, i) { tr.append(E('td', i === 0 ? 'n' : '', String(v))); });
+      $('ptb').append(tr);
+    });
+  }
+  ['All'].concat(regs).forEach(function (r) {
+    var b = chip(r, r === 'All', function () { reg = r; document.querySelectorAll('#regions .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); drawPlayers(); });
+    $('regions').append(b);
+  });
+  drawPlayers();
+
+  // News: real sources, my own short summaries
+  var N = [
+    { s: 'Tracklock', d: 'Mar 6, 2026', t: 'March global rebalance', x: 'Just under 900 changes across heroes, items and bases, sorted by category for easier reading.', u: 'https://tracklock.gg/articles/deadlock-march-2026-patch-notes-nearly-900-changes-across-heroes-items-bases' },
+    { s: 'DeadlockLabs', d: 'May 1, 2026', t: 'April 30 update breakdown', x: 'Twenty-five hero adjustments and thirty-five item changes. Paradox and Drifter gained, Shiv and Vyper lost the most.', u: 'https://deadlocklabs.gg/patches/' },
+    { s: 'Liquipedia', d: 'Jun 4, 2026', t: 'Urn rework in the latest minor update', x: 'The patch list tracks every update from January 2026 onward, including the Urn change.', u: 'https://liquipedia.net/deadlock/Portal:Patches' },
+    { s: 'esports.net', d: 'Jan 22, 2026', t: 'Old Gods, New Blood', x: 'Street Brawl mode, new patrons and six new heroes arriving over several weeks.', u: 'https://www.esports.net/news/deadlock-jan-22-patch-notes-proves-game-is-still-far-from-ready-old-gods-new-blood-update' },
+    { s: 'Mobalytics', d: 'Aug 19, 2026', t: 'Jungle and neutrals guide', x: 'Camp types, timers and tips for earning souls between lane waves.', u: 'https://mobalytics.gg/deadlock/guides/jungle-guide' },
+    { s: 'KeenGamer', d: 'Sep 29, 2026', t: 'City Never Sleeps update', x: 'The first major content update since Old Gods, New Blood: a reworked map, HUD and shop, plus six new heroes.', u: 'https://www.keengamer.com/articles/guides/deadlock-city-never-sleeps-patch-notes-new-heroes-map-changes-and-the-broker/' },
+    { s: 'Kami Labs', d: 'Sep 16, 2026', t: 'Catch-up rework and Celeste nerfed again', x: 'Comeback bounties were reworked and two mobility items swapped roles in the September 16 patch.', u: 'https://kami-labs.fr/en/deadlock/patch-deadlock-16-septembre-2026-rattrapage-revu/' },
+    { s: 'Deadlock Wiki', d: 'Oct 25, 2026', t: 'Full hero list with release dates', x: 'Forty-four released heroes. The six City Never Sleeps heroes arrived between October 2 and October 20.', u: 'https://deadlock.wiki/Heroes_by_release' }
+  ], src = 'All';
+  function drawNews() {
+    $('news').replaceChildren();
+    N.filter(function (n) { return src === 'All' || n.s === src; }).forEach(function (n) {
+      var c = E('article', 'box card'), h = E('h3'), a = E('a', '', n.t); a.href = n.u; a.target = '_blank'; a.rel = 'noreferrer'; h.append(a);
+      c.append(E('div', 'src', n.s + ', ' + n.d), h, E('p', '', n.x)); $('news').append(c);
+    });
+  }
+  ['All'].concat(N.map(function (n) { return n.s; })).forEach(function (s) {
+    var b = chip(s, s === 'All', function () { src = s; document.querySelectorAll('#srcs .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); drawNews(); });
+    $('srcs').append(b);
+  });
+  $('refresh').onclick = function () {
+    var b = this; b.textContent = 'Checking sources…'; b.disabled = true;
+    setTimeout(function () { b.textContent = 'Refresh news'; b.disabled = false; $('upd').textContent = 'Checked ' + N.length + ' sources just now, nothing newer in this snapshot.'; }, 900);
+  };
+  drawNews();
+
+  // Patches
+  [['Jan 30, 2026', 'Street Brawl mode, hero balance and item changes'], ['Mar 6, 2026', 'Global rebalance with nearly 900 changes'], ['Apr 10, 2026', 'Heroes and items balance patch'], ['Apr 30, 2026', 'Gameplay update with a global lifesteal rebalance'], ['May 22, 2026', 'Gameplay update with an Urn rework and a major item and hero rebalance'], ['May 31, 2026', 'Minor update with Apollo buffs and nerfs for several heroes'], ['Jun 4, 2026', 'Urn rework'], ['Jul 9, 2026', 'Weaker Urn Runner, adjusted objective bounty splits and a hero rebalance'], ['Jul 28, 2026', 'Dash timing, Orb Spawner, item and ability adjustments'], ['Aug 22, 2026', 'Item trims and several Celeste ability changes'], ['Sep 16, 2026', 'Comeback bounties reworked, plus slows, parry and reload behavior'], ['Sep 29, 2026', 'City Never Sleeps: reworked map, HUD and shop, six new heroes'], ['Oct 5, 2026', 'Minor update']].forEach(function (p) {
+    var li = E('li'); li.append(E('b', '', p[0]), E('div', '', p[1])); $('pt').append(li);
+  });
+
+  // Farm route: what is available at a given minute
+  var EV = [
+    [0, 'Lane troopers', 'Last-hit waves and secure souls with a melee hit. Push the lane before leaving it.'],
+    [2, 'Easy camps', 'Six camps, back after 4 minutes. Clear them between waves.'],
+    [7, 'Medium and hard camps', 'More souls but stronger neutrals. Medium back after 6 minutes, hard after 8.'],
+    [8, 'Sinner\u2019s Sacrifice', 'Machines inside some camps drop souls when hit with melee.'],
+    [10, 'Urn', 'First Urn at 10:00, then every 5 minutes. Carry it across the map.'],
+    [10, 'Mid-Boss', 'First spawn at 10:00, returns 7 minutes after it falls. Drops the Rejuvenator.']
+  ];
+  function drawFarm() {
+    var m = +$('minute').value; $('mm').textContent = m + ':00'; $('ev').replaceChildren();
+    var live = 0;
+    EV.forEach(function (e) {
+      var on = m >= e[0]; if (on) live++;
+      var r = E('div', 'ev' + (on ? '' : ' off')); var d = E('div'); d.append(E('b', '', e[1]), E('div', 'src', e[2]));
+      r.append(E('span', 'src', e[0] + ':00'), d, E('span', 'st', on ? 'Available' : 'Not yet')); $('ev').append(r);
+    });
+    $('tip').textContent = m < 2 ? 'Stay in lane and take every last hit.' : m < 7 ? 'Clear easy camps between waves, then come back to the lane.' : m < 10 ? 'Add medium camps and look for Sinner\u2019s Sacrifice machines.' : 'Rotate: lane, camps, Urn every 5 minutes, Mid-Boss when your team is ready. ' + live + ' sources of souls are up.';
+  }
+  $('minute').addEventListener('input', drawFarm); drawFarm();
+
+  // Forum
+  var F = [
+    { t: 'Is the Infernus spirit build still worth it after the Urn rework?', g: 'Build', b: 'Kestrel', r: 23, v: 41, a: 120 },
+    { t: 'A simple route for clearing camps before minute ten', g: 'Guide', b: 'Quartz', r: 9, v: 33, a: 300 },
+    { t: 'How do you deal with Warden in lane?', g: 'Question', b: 'Rook', r: 31, v: 18, a: 45 },
+    { t: 'Gun or spirit Haze for solo queue?', g: 'Build', b: 'Velvet', r: 14, v: 27, a: 600 }
+  ], mode = 'Hot', voted = {};
+  function drawForum() {
+    $('th').replaceChildren();
+    F.slice().sort(function (a, b) { return mode === 'New' ? a.a - b.a : (b.v + b.r) - (a.v + a.r); }).forEach(function (t) {
+      var row = E('div', 'thread'), v = E('button', 'vote'); v.type = 'button'; v.setAttribute('aria-pressed', String(!!voted[t.t])); v.setAttribute('aria-label', 'Upvote');
+      v.append(E('span', '', '\u25B2'), E('b', '', String(t.v + (voted[t.t] ? 1 : 0))));
+      v.addEventListener('click', function () { voted[t.t] = !voted[t.t]; drawForum(); });
+      var m = E('div'), k = E('b', '', t.t); m.append(k, E('div', 'src', t.g + ' by ' + t.b + ', ' + (t.a < 60 ? t.a + ' min ago' : Math.round(t.a / 60) + ' h ago')));
+      row.append(v, m, E('span', 'src', t.r + ' replies')); $('th').append(row);
+    });
+  }
+  ['Hot', 'New'].forEach(function (s) {
+    var b = chip(s, s === mode, function () { mode = s; document.querySelectorAll('#fs .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); drawForum(); });
+    $('fs').append(b);
+  });
+  $('nt').addEventListener('submit', function (e) {
+    e.preventDefault(); var t = $('ttl').value.trim(); if (!t) return;
+    F.push({ t: t, g: $('tg').value, b: 'You', r: 0, v: 1, a: 0 }); $('ttl').value = ''; mode = 'New';
+    document.querySelectorAll('#fs .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x.textContent === 'New')); }); drawForum();
+  });
+  drawForum();
+
+  // Home
+  function goTab(n) { document.querySelectorAll('#tabs button').forEach(function (b) { if (b.textContent === n) b.click(); }); window.scrollTo({ top: 0 }); }
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { goTab(b.dataset.go); }); });
+  $('home').addEventListener('click', function (e) { e.preventDefault(); goTab('Home'); });
+  var TL = [
+    ['Builds', 'M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9', 'Builds and win rates', 'Three builds for every hero, sorted by win rate.', H.length + ' heroes'],
+    ['Players', 'M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z', 'Top players', 'The leaderboard with a filter for your region.', P.length + ' players'],
+    ['News', 'M5 4h11v16H5z M16 8h3v12H8 M8 8h5 M8 12h5 M8 16h5', 'News', 'Updates gathered from several sources.', N.length + ' sources'],
+    ['Farm route', 'M6 3h12 M6 21h12 M7 3c0 6 5 6 5 9s-5 3-5 9 M17 3c0 6-5 6-5 9s5 3 5 9', 'Farm route', 'See what is up at any minute of the match.', 'Minutes 0 to 25'],
+    ['Patches', 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M12 7v5l3 2', 'Patch timeline', 'What changed in 2026, month by month.', '13 patches'],
+    ['Forum', 'M4 5h16v11H9l-5 4z', 'Forum', 'Share builds, ask questions, vote on threads.', F.length + ' threads']
+  ];
+  TL.forEach(function (t) {
+    var b = E('button', 'tile'); b.type = 'button';
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + t[1] + '"/></svg>';
+    b.append(E('h3', '', t[2]), E('p', '', t[3]), E('b', '', t[4]));
+    b.addEventListener('click', function () { goTab(t[0]); });
+    $('tiles').append(b);
+  });
+  var em = E('div', 'embers'); em.setAttribute('aria-hidden', 'true');
+  for (var i = 0; i < 16; i++) {
+    var d = E('i'), sz = 3 + Math.random() * 4;
+    d.style.cssText = 'left:' + Math.random() * 100 + '%;width:' + sz + 'px;height:' + sz + 'px;animation-duration:' + (7 + Math.random() * 8) + 's;animation-delay:-' + Math.random() * 12 + 's';
+    em.append(d);
+  }
+  $('stage').append(em);
+})();
+</script>
+</body>
+</html>
